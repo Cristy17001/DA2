@@ -12,6 +12,17 @@ int main() {
     manager.loadShipping();
     manager.loadStadiums();
     manager.loadTourism();
+    Graph graph = manager.getShippingGraph();
+
+    cout << "Backtracking: " << endl;
+    vector<int> auxiliar;
+    backtracking(graph, auxiliar);
+    cout << "Distance: " << getDistance(graph, auxiliar) << endl;
+    printVector(auxiliar, 0);
+
+    cout << "Christofides: " << endl;
+    Christofides_algorithm(graph);
+
     /*
     ifstream edges;
     string str;

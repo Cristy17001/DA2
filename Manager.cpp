@@ -34,12 +34,12 @@ int Manager::loadTourism(){
 
         origin = std::stoi(origin_string);
         destination = std::stoi(destination_string);
-        weight = std::stoi(weight_string);
+        weight = std::stod(weight_string);
 
         //adds the edge && vertex
         if(tourismGraph.addVertex(origin)){tourismGraph.findVertex(origin)->setLabel(origin_label);}
         if(tourismGraph.addVertex(destination)){tourismGraph.findVertex(origin)->setLabel(destination_label);}
-        tourismGraph.addBidirectionalEdge(origin,destination,weight);
+        tourismGraph.addBidirectionalEdge(origin, destination, weight);
     }
 
     tourism.close();
@@ -74,12 +74,12 @@ int Manager::loadShipping(){
 
         origin = std::stoi(origin_string);
         destination = std::stoi(destination_string);
-        weight = std::stoi(weight_string);
+        weight = std::stod(weight_string);
 
         //adds the edge && vertex
         shippingGraph.addVertex(origin);
         shippingGraph.addVertex(destination);
-        shippingGraph.addBidirectionalEdge(origin,destination,weight);
+        shippingGraph.addBidirectionalEdge(origin, destination, weight);
     }
 
     shipping.close();
@@ -112,14 +112,38 @@ int Manager::loadStadiums(){
 
         origin = std::stoi(origin_string);
         destination = std::stoi(destination_string);
-        weight = std::stoi(weight_string);
+        weight = std::stod(weight_string);
 
         //adds the edge && vertex
         stadiumsGraph.addVertex(origin);
         stadiumsGraph.addVertex(destination);
-        stadiumsGraph.addBidirectionalEdge(origin,destination,weight);
+        stadiumsGraph.addBidirectionalEdge(origin, destination, weight);
     }
 
     stadiums.close();
     return 0;
+}
+
+const Graph &Manager::getTourismGraph() const {
+    return tourismGraph;
+}
+
+void Manager::setTourismGraph(const Graph &tourismGraph) {
+    Manager::tourismGraph = tourismGraph;
+}
+
+const Graph &Manager::getShippingGraph() const {
+    return shippingGraph;
+}
+
+void Manager::setShippingGraph(const Graph &shippingGraph) {
+    Manager::shippingGraph = shippingGraph;
+}
+
+const Graph &Manager::getStadiumsGraph() const {
+    return stadiumsGraph;
+}
+
+void Manager::setStadiumsGraph(const Graph &stadiumsGraph) {
+    Manager::stadiumsGraph = stadiumsGraph;
 }

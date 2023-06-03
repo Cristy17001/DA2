@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include <limits>
 #include <algorithm>
+#include "2opt.h"
 #include "data_structures/VertexEdge.h"
 #include "data_structures/Graph.h"
 
@@ -20,6 +21,6 @@ void clear_column(vector<vector<double>>& matrix, int column);
 vector<Vertex *> prim(const Graph& graph);
 vector<pair<int, int>> solve_hungarian(vector<vector<double>> matrix);
 void DFS();
-vector<int> Christofides_algorithm(const Graph& graph);
+vector<int> Christofides_algorithm(Graph& graph);
 
 #endif //DA23_PART2_CHRISTOFIDES_H

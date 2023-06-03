@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <numeric>
 #include "./data_structures/Graph.h"
 #include "./data_structures/MutablePriorityQueue.h"
 
@@ -85,7 +86,7 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
             std::cout<<i<<",";
         std::cout<<"\n";
         if(distance < bestDistance){
-            bestPath = std::vector<int>(path); //copy path to bestPath
+            std::copy(path.begin(), path.end(), bestPath.begin());
             bestDistance = distance;
         }
         return;
@@ -104,9 +105,9 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
             dijkstra_subgraph(g,path.front()); //Better pruning.
         }
         double nextDistance = distance + edge->getWeight();
-        if(nextDistance < bestDistance){ // maybe redundant?
+        if (nextDistance < bestDistance){ // maybe redundant?
             path.push_back(edge->getDest()->getId());
-            recursiveVisit(g,bestPath,bestDistance,path, nextDistance);
+            recursiveVisit(g, bestPath, bestDistance, path, nextDistance);
             path.pop_back();
         }
     }
@@ -114,7 +115,7 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
 }
 double backtracking(Graph& g, std::vector<int>& bestPath){
     bestPath.reserve(g.getNumVertex());
-    std::vector<int> tempPath = std::vector<int>(bestPath);
+    std::vector<int> tempPath = {0};
     tempPath.reserve(g.getNumVertex());
     //TODO apply dijkstra's for better pruning.
     double bestDistance = std::numeric_limits<double>::infinity();

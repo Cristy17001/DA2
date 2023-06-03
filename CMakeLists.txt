@@ -27,6 +27,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_executable(DA23_Part2
         2opt.h
+        2opt.cpp
         backtracking.h
         data_structures/Graph.h
         data_structures/Graph.cpp

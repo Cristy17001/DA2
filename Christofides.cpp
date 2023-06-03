@@ -144,7 +144,7 @@ vector<pair<int, int>> solve_hungarian(vector<vector<double>> matrix) {
 }
 
 
-vector<int> Christofides_algorithm(const Graph& graph) {
+vector<int> Christofides_algorithm(Graph& graph) {
     // STEP 1:
     // Get the MST of the graph using Prims ir Kruskal algorithm
     auto res = prim(graph);
@@ -206,33 +206,32 @@ vector<int> Christofides_algorithm(const Graph& graph) {
     // STEP 6:
     // Find the Euclidean circuit that visits all edges only once
     auto euclidean_circuit = MST.dfs(0);
-    cout << "Euclidean Path" << endl;
 
     double weight = 0;
 
-    int i = 0;
+//    int i = 0;
+//
+//    while (i != euclidean_circuit.size()-1) {
+//        auto current_node = MST.getVertexSet()[euclidean_circuit[i]];
+//        for (auto n: current_node->getAdj()) {
+//            if (n->getDest() == MST.getVertexSet()[euclidean_circuit[i+1]]) {
+//                weight += n->getWeight();
+//                cout << n->getOrig()->getId() << " " << n->getDest()->getId() << " :" << n->getWeight() << endl;
+//            }
+//        }
+//        i++;
+//        if (i == euclidean_circuit.size()-1) {
+//            for (auto n: current_node->getAdj()) {
+//                if (n->getDest() == MST.getVertexSet()[euclidean_circuit[i]]) {
+//                    weight += n->getWeight();
+//                    cout << n->getOrig()->getId() << " " << n->getDest()->getId() << " :" << n->getWeight() << endl;
+//                }
+//            }
+//        }
+//    }
 
-    while (i != euclidean_circuit.size()-1) {
-        auto current_node = MST.getVertexSet()[euclidean_circuit[i]];
-        for (auto n: current_node->getAdj()) {
-            if (n->getDest() == MST.getVertexSet()[euclidean_circuit[i+1]]) {
-                weight += n->getWeight();
-                cout << n->getOrig()->getId() << " " << n->getDest()->getId() << " :" << n->getWeight() << endl;
-            }
-        }
-        i++;
-        if (i == euclidean_circuit.size()-1) {
-            for (auto n: current_node->getAdj()) {
-                if (n->getDest() == MST.getVertexSet()[euclidean_circuit[i]]) {
-                    weight += n->getWeight();
-                    cout << n->getOrig()->getId() << " " << n->getDest()->getId() << " :" << n->getWeight() << endl;
-                }
-            }
-        }
-    }
-    // Add last two edges
-
-    cout << "Total - final: " << weight << endl;
+    //two_opt(graph, euclidean_circuit);
+    cout << "Distance:" << getDistance(graph, euclidean_circuit) << endl;
 
     return {};
 }
