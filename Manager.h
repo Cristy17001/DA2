@@ -1,0 +1,30 @@
+//
+// Created by Cristiano on 03/06/2023.
+//
+
+#ifndef DA23_PART2_MANAGER_H
+#define DA23_PART2_MANAGER_H
+
+#include "data_structures/VertexEdge.h"
+#include "data_structures/Graph.h"
+#include <fstream>
+#include <sstream>
+
+class Manager {
+
+private:
+    Graph tourismGraph;  // toy graph tourism
+
+    Graph shippingGraph; // toy graph shipping
+
+    Graph stadiumsGraph; // toy graph stadiums
+
+public:
+    int loadTourism();
+    int loadShipping();
+    int loadStadiums();
+
+};
+
+
+#endif //DA23_PART2_MANAGER_H

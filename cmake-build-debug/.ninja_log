@@ -1,0 +1,11 @@
+# ninja log v5
+4	1003	7075058983239257	CMakeFiles/DA23_Part2.dir/data_structures/Graph.cpp.obj	1d300bf5f083fa3e
+7	859	7075062594939819	build.ninja	e504544018fd83d8
+4	347	7073484091425784	CMakeFiles/DA23_Part2.dir/data_structures/UFDS.cpp.obj	1be91202c2589f19
+0	73	7073463558605934	CMakeFiles/DA23_Part2.dir/dataStructure.cpp.obj	c79a7c3ad6824cb0
+3	973	7075049156428025	CMakeFiles/DA23_Part2.dir/main.cpp.obj	2894fcfc616fd98
+8	868	7073464795348382	CMakeFiles/DA23_Part2.dir/data_structures/VertexEdge.cpp.obj	ea9f6b4e5cc80fe8
+3247	3797	7075062298937419	../DA23_Part2.exe	699921740acca0c5
+19	3247	7075062293445227	CMakeFiles/DA23_Part2.dir/Christofides.cpp.obj	7f12d31233bd3ba7
+7	1860	7075062279568323	CMakeFiles/DA23_Part2.dir/Manager.cpp.obj	f95b7296ed003e24
+22	1059	7075058983806458	CMakeFiles/DA23_Part2.dir/NearestNeighbor.cpp.obj	d2162c8e2686645d
