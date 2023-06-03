@@ -116,6 +116,11 @@ void Vertex::setLabel(std::string newLabel) {
     label = newLabel;
 }
 
+void Vertex::setNeighbors(std::vector<Edge*> neighbors) {
+    this->adj = neighbors;
+}
+
+
 /********************** Edge  ****************************/
 
 Edge::Edge(Vertex *orig, Vertex *dest, double w): orig(orig), dest(dest), weight(w) {}
@@ -131,6 +136,8 @@ double Edge::getWeight() const {
 Vertex * Edge::getOrig() const {
     return this->orig;
 }
+
+
 
 /*
 Edge *Edge::getReverse() const {

@@ -39,6 +39,7 @@ public:
     Edge * addEdge(Vertex *dest, double w);
     bool removeEdge(int destID);
     void removeOutgoingEdges();
+    void setNeighbors(std::vector<Edge*> neighbors);
     void setLabel(std::string newLabel);
 
     friend class MutablePriorityQueue<Vertex>;

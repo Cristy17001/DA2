@@ -88,17 +88,27 @@ std::vector<int> Graph::dfs(const int &source) {
     return res;
 }
 
-void Graph::dfsVisit(Vertex *v, std::vector<int> & res) const {
+void Graph::dfsVisit(Vertex *v, std::vector<int> &res) const {
     v->setVisited(true);
     res.push_back(v->getId());
     for (auto & e : v->getAdj()) {
         auto w = e->getDest();
         if (!w->isVisited()) {
-            v->setPath(e);
             dfsVisit(w, res);
         }
     }
 }
+
+bool Graph::existsEdge(int source, int dest) {
+    auto vertex = vertexSet[source];
+    for (auto n: vertex->getAdj()) {
+        if (n->getOrig()->getId() == source && n->getDest()->getId() == dest) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 
 

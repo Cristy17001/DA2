@@ -36,6 +36,7 @@ public:
     const std::vector<Vertex *>& getVertexSet() const;
     std::vector<int> dfs(const int & source);
     void dfsVisit(Vertex *v, std::vector<int> & res) const;
+    bool existsEdge(int source, int dest);
 
 protected:
     std::vector<Vertex *> vertexSet;    // vertex set

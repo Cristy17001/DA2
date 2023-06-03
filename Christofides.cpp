@@ -191,36 +191,48 @@ vector<int> Christofides_algorithm(const Graph& graph) {
     // STEP 4:
     // Execute the Hungarian algorithm to determine the perfect matching
     auto pairs = solve_hungarian(CostMatrix);
-    cout << "Hungarian: " << endl;
-    for (auto p : pairs) {
-        cout << odd_vertex_vec[p.first]->getId() << "->" << odd_vertex_vec[p.second]->getId() << endl;
-    }
 
     // STEP 5:
     // Add the edges obtained in the last step to the MST
     for (auto p: pairs) {
         double weight = CostMatrix[p.first][p.second];
-        MST.addBidirectionalEdge(odd_vertex_vec[p.first]->getId(), odd_vertex_vec[p.second]->getId(), weight);
+        if (odd_vertex_vec[p.first]->getId() != odd_vertex_vec[p.second]->getId()
+        && MST.existsEdge(odd_vertex_vec[p.first]->getId(), odd_vertex_vec[p.second]->getId())) {
+            MST.addBidirectionalEdge(odd_vertex_vec[p.first]->getId(), odd_vertex_vec[p.second]->getId(), weight);
+        }
     }
+
 
     // STEP 6:
     // Find the Euclidean circuit that visits all edges only once
     auto euclidean_circuit = MST.dfs(0);
-
     cout << "Euclidean Path" << endl;
-    auto edge = MST.getVertexSet()[0]->getPath();
-    int repeat = graph.getNumVertex();
-    cout << edge->getOrig()->getId() << endl;
 
-    while (repeat != 0) {
-        cout << edge->getDest()->getId() << endl;
-        edge = edge->getDest()->getPath();
-        repeat--;
+    double weight = 0;
+
+    int i = 0;
+
+    while (i != euclidean_circuit.size()-1) {
+        auto current_node = MST.getVertexSet()[euclidean_circuit[i]];
+        for (auto n: current_node->getAdj()) {
+            if (n->getDest() == MST.getVertexSet()[euclidean_circuit[i+1]]) {
+                weight += n->getWeight();
+                cout << n->getOrig()->getId() << " " << n->getDest()->getId() << " :" << n->getWeight() << endl;
+            }
+        }
+        i++;
+        if (i == euclidean_circuit.size()-1) {
+            for (auto n: current_node->getAdj()) {
+                if (n->getDest() == MST.getVertexSet()[euclidean_circuit[i]]) {
+                    weight += n->getWeight();
+                    cout << n->getOrig()->getId() << " " << n->getDest()->getId() << " :" << n->getWeight() << endl;
+                }
+            }
+        }
     }
+    // Add last two edges
 
-    // STEP 7:
-    // Convert the Euclidean circuit obtained to a Hamiltonian circuit
-
+    cout << "Total - final: " << weight << endl;
 
     return {};
 }
