@@ -3,10 +3,16 @@
 #include <fstream>
 #include <sstream>
 #include "Christofides.h"
+#include "Manager.h"
 
 using namespace std;
 
 int main() {
+    Manager manager;
+    manager.loadShipping();
+    manager.loadStadiums();
+    manager.loadTourism();
+    /*
     ifstream edges;
     string str;
     Graph graph;
@@ -56,5 +62,6 @@ int main() {
 //    for(auto i : result)
 //        cout << i<< ",";
 //    cout << "\n";
+    */
     return 0;
 }

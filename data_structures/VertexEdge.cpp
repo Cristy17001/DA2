@@ -112,6 +112,10 @@ void Vertex::deleteEdge(Edge *edge) {
     delete edge;
 }
 
+void Vertex::setLabel(std::string newLabel) {
+    label = newLabel;
+}
+
 /********************** Edge  ****************************/
 
 Edge::Edge(Vertex *orig, Vertex *dest, double w): orig(orig), dest(dest), weight(w) {}

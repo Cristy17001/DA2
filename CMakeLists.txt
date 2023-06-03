@@ -1,9 +1,8 @@
 cmake_minimum_required(VERSION 3.23)
-project(DA23_Part2)
+project(DA2)
 
 set(CMAKE_CXX_STANDARD 14)
 
-# Doxygen Build
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
     set(BUILD_DOC_DIR "${CMAKE_SOURCE_DIR}/docs/output")
@@ -40,4 +39,4 @@ add_executable(DA23_Part2
         Christofides.h
         Christofides.cpp
         dataStructure.cpp
-        main.cpp)
+        main.cpp Manager.cpp)

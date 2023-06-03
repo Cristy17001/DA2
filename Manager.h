@@ -9,14 +9,14 @@
 #include "data_structures/Graph.h"
 #include <fstream>
 #include <sstream>
+#include<iostream>
+#include<string>
 
 class Manager {
 
 private:
     Graph tourismGraph;  // toy graph tourism
-
     Graph shippingGraph; // toy graph shipping
-
     Graph stadiumsGraph; // toy graph stadiums
 
 public:

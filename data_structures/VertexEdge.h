@@ -39,9 +39,11 @@ public:
     Edge * addEdge(Vertex *dest, double w);
     bool removeEdge(int destID);
     void removeOutgoingEdges();
+    void setLabel(std::string newLabel);
 
     friend class MutablePriorityQueue<Vertex>;
 protected:
+    std::string label;
     int id;                // identifier
     std::vector<Edge *> adj;  // outgoing edges
     std::vector<Edge *> incoming; // incoming edges
