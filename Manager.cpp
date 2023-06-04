@@ -120,6 +120,10 @@ int Manager::loadStadiums() {
 }
 
 int Manager::loadExtra(const std::string& n_edges) {
+    if (extraGraph.getNumVertex() != 0) {
+        extraGraph.clear();
+    }
+
     std::unordered_set<std::string> possibilities = {"25", "50", "75", "100", "200", "300", "400", "500", "600", "700", "800", "900"};
     std::string file_path = "./data/extra/edges_";
     if (possibilities.find(n_edges) == possibilities.end()) {
