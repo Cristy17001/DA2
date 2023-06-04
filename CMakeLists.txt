@@ -37,6 +37,8 @@ add_executable(DA23_Part2
         data_structures/UFDS.cpp
         NearestNeighbor.h
         NearestNeighbor.cpp
+        Timer.h
+        Timer.cpp
         Christofides.h
         Christofides.cpp
         dataStructure.cpp

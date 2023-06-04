@@ -1,4 +1,5 @@
 #include "Christofides.h"
+#include "Timer.h"
 
 // Auxiliary function for Christofides
 double min_row(vector<vector<double>> matrix, int row, int ignore_column) {
@@ -145,8 +146,10 @@ vector<pair<int, int>> solve_hungarian(vector<vector<double>> matrix) {
 
 
 vector<int> Christofides_algorithm(Graph& graph) {
+    Timer timer;
+
     // STEP 1:
-    // Get the MST of the graph using Prims ir Kruskal algorithm
+    // Get the MST of the graph using Prims or Kruskal algorithm
     auto res = prim(graph);
 
     Graph MST;
@@ -207,31 +210,13 @@ vector<int> Christofides_algorithm(Graph& graph) {
     // Find the Euclidean circuit that visits all edges only once
     auto euclidean_circuit = MST.dfs(0);
 
-    double weight = 0;
-
-//    int i = 0;
-//
-//    while (i != euclidean_circuit.size()-1) {
-//        auto current_node = MST.getVertexSet()[euclidean_circuit[i]];
-//        for (auto n: current_node->getAdj()) {
-//            if (n->getDest() == MST.getVertexSet()[euclidean_circuit[i+1]]) {
-//                weight += n->getWeight();
-//                cout << n->getOrig()->getId() << " " << n->getDest()->getId() << " :" << n->getWeight() << endl;
-//            }
-//        }
-//        i++;
-//        if (i == euclidean_circuit.size()-1) {
-//            for (auto n: current_node->getAdj()) {
-//                if (n->getDest() == MST.getVertexSet()[euclidean_circuit[i]]) {
-//                    weight += n->getWeight();
-//                    cout << n->getOrig()->getId() << " " << n->getDest()->getId() << " :" << n->getWeight() << endl;
-//                }
-//            }
-//        }
-//    }
-
-    //two_opt(graph, euclidean_circuit);
+    two_opt(graph, euclidean_circuit);
     cout << "Distance:" << getDistance(graph, euclidean_circuit) << endl;
+    for (auto e: euclidean_circuit) {
+        cout << e << ", ";
+    }
+
+
 
     return euclidean_circuit;
 }

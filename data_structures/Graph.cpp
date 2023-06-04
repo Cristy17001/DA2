@@ -99,6 +99,10 @@ void Graph::dfsVisit(Vertex *v, std::vector<int> &res) const {
     }
 }
 
+void Graph::clear() {
+    vertexSet.clear();
+}
+
 bool Graph::existsEdge(int source, int dest) {
     auto vertex = vertexSet[source];
     for (auto n: vertex->getAdj()) {

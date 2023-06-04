@@ -1,7 +1,3 @@
-//
-// Created by Cristiano on 03/06/2023.
-//
-
 #include "Manager.h"
 
 
@@ -86,7 +82,7 @@ int Manager::loadShipping(){
     return 0;
 }
 
-int Manager::loadStadiums(){
+int Manager::loadStadiums() {
     std::ifstream stadiums;
     std::string line;
     stadiums.open("./data/Toy-Graphs/stadiums.csv");
@@ -124,6 +120,105 @@ int Manager::loadStadiums(){
     return 0;
 }
 
+int Manager::loadExtra(const std::string& n_edges) {
+    std::unordered_set<std::string> possibilities = {"25", "50", "75", "100", "200", "300", "400", "500", "600", "700", "800", "900"};
+    std::string file_path = "./data/extra/edges_";
+    if (possibilities.find(n_edges) == possibilities.end()) {
+        std::cout << "Error: no such numbers of edges was found!" << std::endl;
+        return 1;
+    }
+    else {
+        file_path += n_edges + ".csv";
+    }
+
+    std::ifstream extra;
+    std::string line;
+    extra.open(file_path);
+
+    //checks if opened
+    if(extra.is_open()){
+        std::getline(extra, line);
+    } //gets the first line
+    else {
+        std::cout << "Could not open file";
+        return 1;
+    }
+
+    //loads graph
+    while (!extra.eof()){
+
+        //variables declaration &loads them
+        int origin, destination;
+        double weight;
+        std::string origin_string,destination_string,weight_string;
+
+        std::getline(extra, origin_string,',');
+        std::getline(extra, destination_string,',');
+        std::getline(extra, weight_string);
+
+        if (origin_string.empty() || destination_string.empty() || weight_string.empty()) {continue;}
+        origin = std::stoi(origin_string);
+        destination = std::stoi(destination_string);
+        weight = std::stod(weight_string);
+
+        //adds the edge && vertex
+        extraGraph.addVertex(origin);
+        extraGraph.addVertex(destination);
+        extraGraph.addBidirectionalEdge(origin, destination, weight);
+    }
+
+    extra.close();
+
+    return 0;
+}
+
+int Manager::loadPathGraph(const std::string& path) {
+    if (pathGraph.getNumVertex() != 0) {
+        pathGraph.clear();
+    }
+
+    std::ifstream file;
+    std::string line;
+    file.open(path);
+
+    //checks if opened
+    if(file.is_open()){
+        std::getline(file, line);
+    } //gets the first line
+    else {
+        std::cout << "Could not open file";
+        return 1;
+    }
+
+    //loads graph
+    while (!file.eof()){
+
+        //variables declaration &loads them
+        int origin, destination;
+        double weight;
+        std::string origin_string,destination_string,weight_string;
+
+        std::getline(file, origin_string,',');
+        std::getline(file, destination_string,',');
+        std::getline(file, weight_string);
+
+        if (origin_string.empty() || destination_string.empty() || weight_string.empty()) {continue;}
+        origin = std::stoi(origin_string);
+        destination = std::stoi(destination_string);
+        weight = std::stod(weight_string);
+
+        //adds the edge && vertex
+        pathGraph.addVertex(origin);
+        pathGraph.addVertex(destination);
+        pathGraph.addBidirectionalEdge(origin, destination, weight);
+    }
+
+    file.close();
+
+    return 0;
+}
+
+
 const Graph &Manager::getTourismGraph() const {
     return tourismGraph;
 }
@@ -146,4 +241,20 @@ const Graph &Manager::getStadiumsGraph() const {
 
 void Manager::setStadiumsGraph(const Graph &stadiumsGraph) {
     Manager::stadiumsGraph = stadiumsGraph;
+}
+
+const Graph &Manager::getExtraGraph() const {
+    return extraGraph;
+}
+
+void Manager::setExtraGraph(const Graph &extraGraph) {
+    Manager::extraGraph = extraGraph;
+}
+
+const Graph &Manager::getPathGraph() const {
+    return pathGraph;
+}
+
+void Manager::setPathGraph(const Graph &pathGraph) {
+    Manager::pathGraph = pathGraph;
 }

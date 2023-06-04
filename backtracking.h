@@ -3,6 +3,7 @@
 #include <numeric>
 #include "./data_structures/Graph.h"
 #include "./data_structures/MutablePriorityQueue.h"
+#include "Timer.h"
 
 #define DIJKSTRA_OPTIMIZATION_MIN_HEIGHT (8) //minimum distance in levels from leaf nodes in which dijkstra is called.
 
@@ -114,12 +115,13 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
     v->setVisited(false);
 }
 double backtracking(Graph& g, std::vector<int>& bestPath){
+    Timer timer;
     bestPath.resize(g.getNumVertex());
     dijkstra(g,0);
     std::iota(bestPath.begin(), bestPath.end(),0);
     std::vector<int> tempPath = {0};
     tempPath.reserve(g.getNumVertex());
-    //TODO apply dijkstra's for better pruning.
+    dijkstra(g, 0);
     double bestDistance = std::numeric_limits<double>::infinity();
     recursiveVisit(g,bestPath,bestDistance, tempPath, 0);
     return bestDistance;

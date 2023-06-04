@@ -7,8 +7,9 @@
 #include <algorithm>
 #include "data_structures/VertexEdge.h"
 #include "data_structures/Graph.h"
+#include "2opt.h"
 
 
-std::vector<int> nearestNeighborTSP(Vertex* startVertex,const Graph& graph);
+std::vector<int> nearestNeighbor(Vertex* startVertex, Graph& graph);
 
 #endif //DA23_PART2_NEARESTNEIGHBOR_H

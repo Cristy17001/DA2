@@ -30,16 +30,16 @@ void printVector(std::vector<int>& v, int line){
 }
 double two_opt(Graph& g, std::vector<int>& bestPath){
     //TODO generate a starting path.
-    printVector(bestPath,31);
+    //printVector(bestPath,31);
     std::vector<int> testPath(g.getNumVertex());
-    printVector(testPath,33);
+    //printVector(testPath,33);
     double bestDistance = getDistance(g, bestPath);
     bool foundImprovement;
     do{
         foundImprovement = false;
         for(unsigned int i=1; i<bestPath.size() && !foundImprovement; ++i){
             //testPath.push_back(bestPath[i-1]);
-            printVector(testPath,41);
+            //printVector(testPath,41);
             testPath[i-1]=bestPath[i-1];
             for(unsigned int j= i+1 ; j <= bestPath.size(); ++j){
                 auto bestJt=bestPath.begin() + j;

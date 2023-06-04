@@ -1,13 +1,14 @@
 #include "NearestNeighbor.h"
+#include "Timer.h"
 
-std::vector<int> nearestNeighborTSP(Vertex* startVertex,const Graph& graph) {
-
+std::vector<int> nearestNeighbor(Vertex* startVertex, Graph& graph) {
+    Timer timer;
 
     std::vector<int> tour; //gets result
 
     //resets
     std::vector<Vertex*> vertexSet = graph.getVertexSet();
-    for(int i = 0;i<graph.getNumVertex();i++){
+    for(int i = 0; i<graph.getNumVertex(); i++){
         vertexSet[i]->setVisited(false);
     }
 
@@ -47,6 +48,13 @@ std::vector<int> nearestNeighborTSP(Vertex* startVertex,const Graph& graph) {
         tour.push_back(nextVertex->getId());
         currentVertex = nextVertex;
     }
+
+    two_opt(graph, tour);
+    std::cout << "Distance:" << getDistance(graph, tour) << std::endl;
+    for (auto e: tour) {
+        std::cout << e << ", ";
+    }
+
 
     return tour;
 }
