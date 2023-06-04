@@ -3,12 +3,17 @@
 double getDistance(const Graph& g, std::vector<int>& path){
     double distance = 0;
     for(unsigned int i=0; i<path.size();++i){
-        unsigned int next= (i == path.size()-1)? 0: i+1 ;
+        unsigned int nextID= (i == (path.size()-1))? path[0]: path[i+1] ;
         Vertex*v = g.findVertex(path[i]);
+        if (v == nullptr)
+            return - INF;
+        
         Edge*e = nullptr;
         for(Edge*tmp:v->getAdj()){
-            if(tmp->getDest()->getId() == next)
+            if(tmp->getDest()->getId() == nextID){
                 e=tmp;
+                break;
+            }
         }
         if(e == nullptr)
             return INF;
