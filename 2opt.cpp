@@ -41,7 +41,7 @@ double two_opt(Graph& g, std::vector<int>& bestPath){
             //testPath.push_back(bestPath[i-1]);
             printVector(testPath,41);
             testPath[i-1]=bestPath[i-1];
-            for(unsigned int j= i+1 ; j < bestPath.size(); ++j){
+            for(unsigned int j= i+1 ; j <= bestPath.size(); ++j){
                 auto bestJt=bestPath.begin() + j;
                 auto testJt = std::reverse_copy(bestPath.begin()+i,bestJt,testPath.begin()+i);
                 //std::advance(testIt,j-i);
