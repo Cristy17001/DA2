@@ -41,7 +41,7 @@ int getChoice(int min, int max) {
 }
 
 void printMenu(string &title , vector<string> &options){
-    if(title.size()>MENU_WIDTH-2)
+    if(title.size() > MENU_WIDTH-2)
         return;
     string line = "+" + string(MENU_WIDTH-2,'-') + "+\n";
     cout << line;
@@ -111,7 +111,7 @@ void printTour(vector<int> tour,long double dist){
     cout << "Distance: " << dist << endl;
 }
 
-void printResults(Graph graph,string title1){
+void printResults(Graph graph, const string& title1){
     Manager temp;
 
     printSectionTitle(title1);
@@ -119,22 +119,22 @@ void printResults(Graph graph,string title1){
 
     cout << "->Backtracking" << endl;
     auto dist1 = backtracking(graph, tour1);
-    printTour(tour1,dist1);
+    printTour(tour1, dist1);
     cout << endl;
     cout << endl;
 
     cout << "->Nearest Neighbour" << endl;
     auto tour2 = nearestNeighbor(graph.getVertexSet()[0], graph);
     auto dist2 = getDistance(graph,tour2, false, temp);
-    printTour(tour2,dist2);
+    printTour(tour2, dist2);
 
     cout << endl;
     cout << endl;
 
     cout << "->Christofides Algorithm" << endl;
-    auto tour3 =Christofides_algorithm(graph);
-    auto dist3 = getDistance(graph,tour2, false, temp);
-    printTour(tour3,dist3);
+    auto tour3 = Christofides_algorithm(graph);
+    auto dist3 = getDistance(graph, tour2, false, temp);
+    printTour(tour3, dist3);
 }
 
 
@@ -143,12 +143,11 @@ int main() {
     manager.loadShipping();
     manager.loadStadiums();
     manager.loadTourism();
-    manager.loadExtra("200");
-    manager.loadPathGraph("./data/extra/edges_25.csv");
+    //manager.loadExtra("200");
+    //manager.loadPathGraph("./data/extra/edges_25.csv");
     Graph shippingGraph = manager.getShippingGraph();
     Graph stadiumGraph = manager.getStadiumsGraph();
     Graph tourismGraph = manager.getTourismGraph();
-
 
     string title= "Railway Network Manager";
     vector<string> choices = {
@@ -158,17 +157,18 @@ int main() {
             "Select Real-World graph with Christofides algorithm",
             "Quit"
     };
+
     int choiceint = 0;
     do {
         printMenu(title, choices);
         choiceint = getChoice(1, 5);
         switch (choiceint) {
             case 1:
-                printResults(shippingGraph,"SHIPPING GRAPH");
-                printResults(stadiumGraph,"STADIUM GRAPH");
-                printResults(tourismGraph,"TOURISM GRAPH");
+                printResults(shippingGraph, "SHIPPING GRAPH");
+                printResults(stadiumGraph, "STADIUM GRAPH");
+                printResults(tourismGraph, "TOURISM GRAPH");
                 cout << endl;
-                for(int i=0;i<MENU_WIDTH;i++){cout << "=";}
+                for(int i=0; i< MENU_WIDTH; i++){cout << "=";}
                 cout << endl;
                 break;
             case 2:

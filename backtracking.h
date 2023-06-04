@@ -7,6 +7,15 @@
 
 #define DIJKSTRA_OPTIMIZATION_MIN_HEIGHT (8) //minimum distance in levels from leaf nodes in which dijkstra is called.
 
+
+/**
+ * Applies Dijkstra's algorithm to a subgraph of the given graph.
+ *
+ * @param g The graph.
+ * @param startIndex The index of the starting vertex.
+ *
+ * @complexity O(|V| + |E| log |V|), where |V| is the number of vertices and |E| is the number of edges in the subgraph.
+ */
 void dijkstra_subgraph(Graph& g, int startIndex){
     MutablePriorityQueue<Vertex> q;
     for(Vertex* v : g.getVertexSet()){
@@ -37,6 +46,15 @@ void dijkstra_subgraph(Graph& g, int startIndex){
         }
     }
 }
+
+/**
+ * Applies Dijkstra's algorithm to the entire graph.
+ *
+ * @param g The graph.
+ * @param startIndex The index of the starting vertex.
+ *
+ * @complexity O(|V| + |E| log |V|), where |V| is the number of vertices and |E| is the number of edges in the graph.
+ */
 void dijkstra(Graph& g, int startIndex){
     MutablePriorityQueue<Vertex> q;
     for(Vertex* v : g.getVertexSet()){
@@ -64,6 +82,17 @@ void dijkstra(Graph& g, int startIndex){
     }
 }
 
+/**
+ * Recursively visits vertices in the graph to find the best path.
+ *
+ * @param g The graph.
+ * @param bestPath The vector to store the best path found.
+ * @param bestDistance The distance of the best path found.
+ * @param path The current path being explored.
+ * @param distance The current distance of the path being explored.
+ *
+ * @complexity O(|V|!) in the worst case, where |V| is the number of vertices but with the pruning techniques it should be lower
+ */
 void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, std::vector<int>& path, double distance){
     Vertex * v = g.getVertexSet().at(path.back());
     if(v->getDist() >= (bestDistance - distance)) // current node cannot complete cycle in less distance than bestPath.
@@ -109,6 +138,16 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
     }
     v->setVisited(false);
 }
+
+/**
+ * Performs backtracking to find the best path in the graph.
+ *
+ * @param g The graph.
+ * @param bestPath The vector to store the best path found.
+ * @return The distance of the best path found.
+ *
+ * @complexity O(|V|!) in the worst case, where |V| is the number of vertices but with the pruning techniques it should be lower
+ */
 double backtracking(Graph& g, std::vector<int>& bestPath){
     Timer timer;
     timer.start();

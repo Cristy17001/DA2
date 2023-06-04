@@ -15,7 +15,7 @@ using namespace std;
 // Auxiliary function for the Hungarian Algorithm
 /**
  * Find the minimum value in a specified row of a matrix, excluding a specific column.
- *
+ * @complexity O(N) where N is the number of elements in the nodes
  * @param matrix The matrix to search.
  * @param row The index of the row to search.
  * @param ignore_column The index of the column to exclude.
@@ -25,7 +25,7 @@ double min_row(std::vector<std::vector<double>> matrix, int row, int ignore_colu
 
 /**
  * Find the minimum value in a specified column of a matrix, excluding a specific row.
- *
+ * @complexity O(N) where N is the number of elements in the nodes
  * @param matrix The matrix to search.
  * @param column The index of the column to search.
  * @param ignore_row The index of the row to exclude.
@@ -35,7 +35,7 @@ double min_column(const std::vector<std::vector<double>>& matrix, int column, in
 
 /**
  * Clear a specified row of a matrix by setting all its elements to 0.
- *
+ * @complexity O(N) where N is the number of elements in the nodes
  * @param matrix The matrix to modify.
  * @param row The index of the row to clear.
  */
@@ -43,7 +43,7 @@ void clear_row(std::vector<std::vector<double>>& matrix, int row);
 
 /**
  * Clear a specified column of a matrix by setting all its elements to 0.
- *
+ * @complexity O(N) where N is the number of elements in the nodes
  * @param matrix The matrix to modify.
  * @param column The index of the column to clear.
  */
@@ -51,7 +51,7 @@ void clear_column(std::vector<std::vector<double>>& matrix, int column);
 
 /**
  * Perform the Prim's algorithm to find a minimum spanning tree on a graph.
- *
+ * @complexity O(|E| log|V|) where E is the number of edges and V the number of vertices
  * @param graph The Graph object representing the graph to process.
  * @return A vector of Vertex pointers representing the vertices in the minimum spanning tree.
  */
@@ -59,7 +59,7 @@ std::vector<Vertex*> prim(const Graph& graph);
 
 /**
  * Solve the Hungarian algorithm to find the optimal assignment in a matrix.
- *
+ * @complexity O(|V|^3) where V is the number of vertices
  * @param matrix The matrix to solve.
  * @return A vector of pairs representing the optimal assignment in the matrix.
  */
@@ -67,7 +67,7 @@ std::vector<std::pair<int, int>> solve_hungarian(std::vector<std::vector<double>
 
 /**
  * Apply the Christofides algorithm to find an approximate solution for the Traveling Salesman Problem (TSP).
- *
+ * @complexity O(V^3) Where V is the number of vertices of the graph
  * @param graph The Graph object representing the TSP problem.
  * @return A vector of integers representing the order of visited vertices in the TSP tour.
  */

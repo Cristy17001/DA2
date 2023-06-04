@@ -16,6 +16,7 @@
  *
  * @param startVertex Pointer to the starting vertex for the TSP tour.
  * @param graph Reference to the Graph object representing the TSP problem.
+ * @complexity O(N^2), where N is the number of vertices in the graph
  * @return A vector of integers representing the order of visited vertices in the TSP tour.
  */
 std::vector<int> nearestNeighbor(Vertex* startVertex, Graph& graph);

@@ -43,7 +43,6 @@ int Manager::loadTourism(){
 }
 
 int Manager::loadShipping(){
-
     std::ifstream shipping;
     std::string line;
     shipping.open("./data/Toy-Graphs/shipping.csv");

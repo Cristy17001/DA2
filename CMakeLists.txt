@@ -25,7 +25,7 @@ else(DOXYGEN_FOUND)
 endif(DOXYGEN_FOUND)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
-add_executable(DA23_Part2
+add_executable(DA2
         2opt.h
         2opt.cpp
         backtracking.h

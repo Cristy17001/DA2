@@ -30,28 +30,3 @@ long double getDistance(const Graph& g, std::vector<int>& path, bool isRealWorld
     }
     return distance;
 }
-
-//double two_opt(Graph& g, std::vector<int>& bestPath){
-//    std::vector<int> testPath(g.getNumVertex());
-//    double bestDistance = getDistance(g, bestPath);
-//    bool foundImprovement;
-//    do{
-//        foundImprovement = false;
-//        for(unsigned int i=1; i<bestPath.size() && !foundImprovement; ++i){
-//            testPath[i-1]=bestPath[i-1];
-//            for(unsigned int j= i+1 ; j <= bestPath.size(); ++j){
-//                auto bestJt=bestPath.begin() + j;
-//                auto testJt = std::reverse_copy(bestPath.begin()+i,bestJt,testPath.begin()+i);
-//                std::copy(bestJt,bestPath.end(),testJt);
-//                double testDistance = getDistance(g,testPath);
-//                if(testDistance<bestDistance){
-//                    foundImprovement = true;
-//                    bestDistance = testDistance;
-//                    std::copy(testPath.begin()+i,testPath.begin()+j,bestPath.begin()+i);
-//                    break;
-//                }
-//            }
-//        }
-//    } while(foundImprovement);
-//    return bestDistance;
-//}
