@@ -69,7 +69,9 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
     Vertex * v = g.getVertexSet().at(path.back());
     if(v->getDist() >= (bestDistance - distance)) // current node cannot complete cycle in less distance than bestPath.
         return; //Pruned.
-    if(path.size() == g.getNumVertex()-1){//completed cycle.
+    if(path.size() == g.getNumVertex()){//completed cycle.
+        if(path[1] > path.back())
+            return;
         Edge * e=nullptr;
         for (auto edge : v->getAdj()){
             if(edge->getDest()->getId() ==0){
@@ -99,8 +101,6 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
     {
         if(edge->getDest()->isVisited())
             continue; // vertex already in path;
-        if(path.size()==1 && edge->getDest()->getId() > g.getNumVertex()/2)
-            continue; // prevents looking through inverted solutions
         if(g.getNumVertex() - path.size() > DIJKSTRA_OPTIMIZATION_MIN_HEIGHT){ //needs calling again as subbranches will overwrite it.
             dijkstra_subgraph(g,path.front()); //Better pruning.
         }
@@ -114,7 +114,9 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
     v->setVisited(false);
 }
 double backtracking(Graph& g, std::vector<int>& bestPath){
-    bestPath.reserve(g.getNumVertex());
+    bestPath.resize(g.getNumVertex());
+    dijkstra(g,0);
+    std::iota(bestPath.begin(), bestPath.end(),0);
     std::vector<int> tempPath = {0};
     tempPath.reserve(g.getNumVertex());
     //TODO apply dijkstra's for better pruning.
