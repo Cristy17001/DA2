@@ -212,6 +212,6 @@ vector<int> Christofides_algorithm(Graph& graph) {
     auto euclidean_circuit = MST.dfs(0);
 
     timer.stop();
-    cout << "Function took: " << timer.getDurationInSeconds() << " ms" << endl;
+    cout << "Function took: " << timer.getDurationInSeconds() << " s" << endl;
     return euclidean_circuit;
 }

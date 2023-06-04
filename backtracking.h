@@ -82,10 +82,7 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
             return; //last vertex in path cannot reach starting node.
         }
         distance += e->getWeight();
-        std::cout << "best:" << bestDistance << " distance:"<<distance<<" path:";
-        for(auto i :path)
-            std::cout<<i<<",";
-        std::cout<<"\n";
+
         if(distance < bestDistance){
             std::copy(path.begin(), path.end(), bestPath.begin());
             bestDistance = distance;
