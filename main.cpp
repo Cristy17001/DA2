@@ -180,13 +180,13 @@ int main() {
             "GRAPH WITH 700 EDGES",
             "GRAPH WITH 800 EDGES",
             "GRAPH WITH 900 EDGES",
-            "QUIT"
+            "BACK"
     };
     vector<string> choicesRealWorldGraph = {
             "GRAPH 1",
             "GRAPH 2",
             "GRAPH 3",
-            "QUIT"
+            "BACK"
     };
 
     vector<string> choichesPathGraph{
@@ -195,7 +195,7 @@ int main() {
         "CHRISTOFIDES",
         "NEAREST NEIGHBOUR AND CHRISTOFIDES",
         "ALL 3 ALGORITHMS",
-        "QUIT"
+        "BACK"
     };
     int choiceint = 0;
     int choiceint2 = 0;
