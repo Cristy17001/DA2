@@ -94,7 +94,7 @@ vector<pair<int, int>> solve_hungarian(vector<vector<double>> matrix) {
     while (res.size() != size) {
         // Row reduction
         for (int i = 0; i < size; i++) {
-            double row_minimum = min_row(matrix, i, INT_MAX);
+            double row_minimum = min_row(matrix, i, std::numeric_limits<int>::max());
             if (row_minimum != INF && row_minimum != 0) {
                 for (auto &e: matrix[i]) {
                     // Subtract the row minimum
@@ -105,7 +105,7 @@ vector<pair<int, int>> solve_hungarian(vector<vector<double>> matrix) {
 
         // Column reduction
         for (int i = 0; i < size; i++) {
-            double column_minimum = min_column(matrix, i, INT_MAX);
+            double column_minimum = min_column(matrix, i, std::numeric_limits<int>::max());
             if (column_minimum != INF && column_minimum != 0) {
                 for (int j = 0; j < size; j++) {
                     matrix[j][i] -= column_minimum;
@@ -233,5 +233,5 @@ vector<int> Christofides_algorithm(Graph& graph) {
     //two_opt(graph, euclidean_circuit);
     cout << "Distance:" << getDistance(graph, euclidean_circuit) << endl;
 
-    return {};
+    return euclidean_circuit;
 }
