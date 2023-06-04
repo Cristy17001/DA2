@@ -147,6 +147,7 @@ vector<pair<int, int>> solve_hungarian(vector<vector<double>> matrix) {
 
 vector<int> Christofides_algorithm(Graph& graph) {
     Timer timer;
+    timer.start();
 
     // STEP 1:
     // Get the MST of the graph using Prims or Kruskal algorithm
@@ -210,13 +211,7 @@ vector<int> Christofides_algorithm(Graph& graph) {
     // Find the Euclidean circuit that visits all edges only once
     auto euclidean_circuit = MST.dfs(0);
 
-    two_opt(graph, euclidean_circuit);
-    cout << "Distance:" << getDistance(graph, euclidean_circuit) << endl;
-    for (auto e: euclidean_circuit) {
-        cout << e << ", ";
-    }
-
-
-
+    timer.stop();
+    cout << "Function took: " << timer.getDurationInSeconds() << " ms" << endl;
     return euclidean_circuit;
 }

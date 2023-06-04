@@ -3,6 +3,7 @@
 
 std::vector<int> nearestNeighbor(Vertex* startVertex, Graph& graph) {
     Timer timer;
+    timer.start();
 
     std::vector<int> tour; //gets result
 
@@ -41,13 +42,7 @@ std::vector<int> nearestNeighbor(Vertex* startVertex, Graph& graph) {
         tour.push_back(nextVertex->getId());
         currentVertex = nextVertex;
     }
-
-    two_opt(graph, tour);
-    std::cout << "Distance:" << getDistance(graph, tour) << std::endl;
-    for (auto e: tour) {
-        std::cout << e << ", ";
-    }
-
-
+    timer.stop();
+    std::cout << "Function took: " << timer.getDurationInSeconds() << " s" << std::endl;
     return tour;
 }

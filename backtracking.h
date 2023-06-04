@@ -18,7 +18,6 @@ void dijkstra_subgraph(Graph& g, int startIndex){
     Vertex * startVertex = g.findVertex(startIndex);
     startVertex->setDist(0);
     q.insert(startVertex);
-    //startVertex->setPath(g.findVertex(startIndex)->getAdj().at(0));
     while(!q.empty()){
         Vertex*curr=q.extractMin();
         for(Edge*e : curr->getAdj()){
@@ -47,7 +46,6 @@ void dijkstra(Graph& g, int startIndex){
     Vertex * startVertex = g.findVertex(startIndex);
     startVertex->setDist(0);
     q.insert(startVertex);
-    //startVertex->setPath(startVertex->getAdj().at(0));
     while(!q.empty()){
         Vertex*curr=q.extractMin();
         for(Edge*e : curr->getAdj()){
@@ -116,6 +114,7 @@ void recursiveVisit(Graph& g, std::vector<int>& bestPath, double& bestDistance, 
 }
 double backtracking(Graph& g, std::vector<int>& bestPath){
     Timer timer;
+    timer.start();
     bestPath.resize(g.getNumVertex());
     dijkstra(g,0);
     std::iota(bestPath.begin(), bestPath.end(),0);
@@ -124,5 +123,7 @@ double backtracking(Graph& g, std::vector<int>& bestPath){
     dijkstra(g, 0);
     double bestDistance = std::numeric_limits<double>::infinity();
     recursiveVisit(g,bestPath,bestDistance, tempPath, 0);
+    timer.stop();
+    std::cout << "Function took: " << timer.getDurationInSeconds() << " s" << std::endl;
     return bestDistance;
 }

@@ -219,6 +219,89 @@ int Manager::loadPathGraph(const std::string& path) {
 }
 
 
+int Manager::loadRealWorld(const std::string& graph_name) {
+    std::string file_path_edge = "./data/Real-world Graphs/" + graph_name + "/edges.csv";
+    std::string file_path_nodes = "./data/Real-world Graphs/" + graph_name + "/nodes.csv";
+
+    std::ifstream file;
+    std::string line;
+    file.open(file_path_edge);
+    // Edges
+    //checks if opened
+    if(file.is_open()){
+        std::getline(file, line);
+    } //gets the first line
+    else {
+        std::cout << "Could not open file";
+        return 1;
+    }
+
+    //loads graph
+    while (!file.eof()) {
+
+        //variables declaration &loads them
+        int origin, destination;
+        double weight;
+        std::string origin_string,destination_string,weight_string;
+
+        std::getline(file, origin_string,',');
+        std::getline(file, destination_string,',');
+        std::getline(file, weight_string);
+
+        if (origin_string.empty() || destination_string.empty() || weight_string.empty()) {continue;}
+        origin = std::stoi(origin_string);
+        destination = std::stoi(destination_string);
+        weight = std::stod(weight_string);
+
+        //adds the edge && vertex
+        realWorld.addVertex(origin);
+        realWorld.addVertex(destination);
+        realWorld.addBidirectionalEdge(origin, destination, weight);
+    }
+
+    file.close();
+
+    file.open(file_path_nodes);
+
+    // Nodes
+    //checks if opened
+    if(file.is_open()){
+        std::getline(file, line);
+    } //gets the first line
+    else {
+        std::cout << "Could not open file";
+        return 1;
+    }
+
+    //loads graph
+    while (!file.eof()) {
+
+        //variables declaration &loads them
+        int nodes;
+        double latitude, longitude;
+        std::string nodes_string, latitude_string, longitude_string;
+
+        std::getline(file, nodes_string,',');
+        std::getline(file, longitude_string,',');
+        std::getline(file, latitude_string);
+
+        if (nodes_string.empty() || latitude_string.empty() || longitude_string.empty()) {continue;}
+        nodes = std::stoi(nodes_string);
+        latitude = std::stod(latitude_string);
+        longitude = std::stod(longitude_string);
+
+        // Add the nodes
+        geo_pos pos = {latitude, longitude};
+        geo_positions.insert({nodes, pos});
+    }
+
+    file.close();
+
+    return 0;
+}
+
+
+
 const Graph &Manager::getTourismGraph() const {
     return tourismGraph;
 }
@@ -257,4 +340,43 @@ const Graph &Manager::getPathGraph() const {
 
 void Manager::setPathGraph(const Graph &pathGraph) {
     Manager::pathGraph = pathGraph;
+}
+
+const Graph &Manager::getRealWorld() const {
+    return realWorld;
+}
+
+void Manager::setRealWorld(const Graph &realWorld) {
+    Manager::realWorld = realWorld;
+}
+
+const std::unordered_map<int, geo_pos> &Manager::getGeoPositions() const {
+    return geo_positions;
+}
+
+void Manager::setGeoPositions(const std::unordered_map<int, geo_pos> &geoPositions) {
+    geo_positions = geoPositions;
+}
+
+double Manager::toRadians(double degrees) {
+    return degrees * M_PI / 180.0;
+}
+
+// Calculate the distance between two points using Haversine formula
+double Manager::haversineDistance(double lat1, double lon1, double lat2, double lon2) {
+    const double earthRadiusKm = 6371.0; // Radius of the Earth in kilometers
+
+    // Convert latitude and longitude to radians
+    double dLat = toRadians(lat2 - lat1);
+    double dLon = toRadians(lon2 - lon1);
+
+    double a = std::sin(dLat / 2) * std::sin(dLat / 2) +
+               std::cos(toRadians(lat1)) * std::cos(toRadians(lat2)) *
+               std::sin(dLon / 2) * std::sin(dLon / 2);
+
+    double c = 2 * std::atan2(std::sqrt(a), std::sqrt(1 - a));
+
+    // Calculate the distance using the Earth's radius
+    double distance = earthRadiusKm * c;
+    return distance;
 }

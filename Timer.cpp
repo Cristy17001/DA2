@@ -1,14 +1,21 @@
 #include "Timer.h"
 
-Timer::Timer() {
-    start = std::chrono::high_resolution_clock::now();
+void Timer::start() {
+    startTime = std::chrono::high_resolution_clock::now();
 }
 
+void Timer::stop() {
+    endTime = std::chrono::high_resolution_clock::now();
+}
 
-Timer::~Timer() {
-    end = std::chrono::high_resolution_clock::now();
-    duration = end - start;
+double Timer::getDurationInSeconds() const {
+    return std::chrono::duration<double>(endTime - startTime).count();
+}
 
-    float ms = duration.count() * 1000.0f;
-    std::cout << "\n" <<"function duration: " << ms << " ms" << std::endl;
+long long Timer::getDurationInMilliseconds() const {
+    return std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+}
+
+long long Timer::getDurationInMicroseconds() const {
+    return std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count();
 }

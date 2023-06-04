@@ -8,12 +8,9 @@
 using namespace std;
 
 int main() {
+    cout << "Loading..." << endl;
     Manager manager;
-    manager.loadShipping();
-    manager.loadStadiums();
-    manager.loadTourism();
-    manager.loadExtra("200");
-    manager.loadPathGraph("./data/extra/edges_25.csv");
+    manager.loadRealWorld("graph1");
 
 
     //cout << "Backtracking: " << endl;
@@ -22,13 +19,25 @@ int main() {
     //cout << "Distance: " << getDistance(graph, auxiliar) << endl;
     //printVector(auxiliar, 0);
 
-    Graph graph = manager.getShippingGraph();
 
-    cout << "Christofides: " << endl;
-    Christofides_algorithm(graph);
-
+    Graph graph = manager.getRealWorld();
+    Vertex * starting_node = graph.getVertexSet()[0];
 
     cout << "Nearest Neighbor" << endl;
-    nearestNeighbor(graph.getVertexSet()[0], graph);
+    auto tour = nearestNeighbor(starting_node, graph);
 
+    std::cout << "Distance:" << getDistance(graph, tour, true, manager) << std::endl;
+    for (auto e: tour) {
+        std::cout << e << ", ";
+    }
+    cout << starting_node->getId();
+
+    cout << "\nChristofides: " << endl;
+    auto path = Christofides_algorithm(graph);
+    std::cout << "Distance:" << getDistance(graph, path, true, manager) << std::endl;
+    for (auto e: path) {
+        std::cout << e << ", ";
+    }
+
+    cout << starting_node->getId();
 }

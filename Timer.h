@@ -1,12 +1,19 @@
 #include <chrono>
-#include <thread>
-#include <iostream>
 
-struct Timer {
+class Timer {
+public:
+    Timer() : startTime(), endTime() {}
 
-    std::chrono::high_resolution_clock::time_point start, end;
-    std::chrono::duration<float> duration;
+    void start();
 
-    Timer();
-    ~Timer();
+    void stop();
+
+    double getDurationInSeconds() const;
+
+    long long getDurationInMilliseconds() const;
+
+    long long getDurationInMicroseconds() const;
+
+private:
+    std::chrono::time_point<std::chrono::high_resolution_clock> startTime, endTime;
 };

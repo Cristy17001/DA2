@@ -10,6 +10,14 @@
 #include "2opt.h"
 
 
+/**
+ * Finds an approximate solution to the Traveling Salesman Problem (TSP)
+ * using the Nearest Neighbor heuristic.
+ *
+ * @param startVertex Pointer to the starting vertex for the TSP tour.
+ * @param graph Reference to the Graph object representing the TSP problem.
+ * @return A vector of integers representing the order of visited vertices in the TSP tour.
+ */
 std::vector<int> nearestNeighbor(Vertex* startVertex, Graph& graph);
 
 #endif //DA23_PART2_NEARESTNEIGHBOR_H

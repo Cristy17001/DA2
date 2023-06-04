@@ -41,5 +41,4 @@ add_executable(DA23_Part2
         Timer.cpp
         Christofides.h
         Christofides.cpp
-        dataStructure.cpp
         main.cpp Manager.cpp)
