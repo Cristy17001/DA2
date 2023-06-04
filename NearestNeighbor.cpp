@@ -32,13 +32,6 @@ std::vector<int> nearestNeighbor(Vertex* startVertex, Graph& graph) {
         }
 
         if (nearestNeighborEdge == nullptr) { //checks if tour is finished
-            bool isEdge = false;
-            // All nodes have been visited, return to the starting vertex
-            for(Edge* edge : currentVertex->getAdj()){
-                if(edge->getDest()==startVertex) isEdge= true;
-            }
-            if(isEdge) tour.push_back(startVertex->getId());
-            else std::cout <<"something went wrong";
             break;
         }
 
